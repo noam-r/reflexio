@@ -1,14 +1,14 @@
 # Reflective Adjustments
 
-This page explains bounded changes that can improve processing without denying the original event.
+This page explains bounded retrospective changes that can revise processing without denying the original event.
 
 ## Purpose
 
-Define the controlled changes the system can propose after reflective review.
+Define the controlled revision operations that may follow reflective review.
 
 ## Core Idea
 
-A reflective adjustment is a bounded change to expectation, confidence, interpretation, attribution, or scope that supports more adaptive processing of an event. It does not deny what happened. Instead, it asks whether the internal chain that processed the event can be made more accurate, proportional, or less damaging.
+A reflective adjustment is a bounded revision to expectation, confidence, interpretation, attribution, or scope that changes how a past event is processed after review. It does not deny what happened. Instead, it asks whether the internal chain that processed the event can be made more accurate, proportional, or less damaging.
 
 Reflective adjustments are one of the architecture’s main tools for growth.
 
@@ -65,7 +65,7 @@ Instead, it should say:
 
 ## Results of Reflective Adjustment
 
-A successful reflective adjustment may lead to:
+A successful reflective adjustment may produce downstream changes such as:
 - reduced unnecessary self-damage
 - clearer boundaries
 - better expectation calibration

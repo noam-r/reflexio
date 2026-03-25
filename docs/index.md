@@ -2,8 +2,6 @@
 
 An Explainable Affective Ledger Architecture
 
-![Reflexio Architecture Diagram](assets/reflexio-graphics.png)
-
 ## What Reflexio is
 
 Reflexio is a conceptual framework for modeling how an interactive system can preserve emotional continuity over time without hiding its internal changes inside opaque mutable state.
@@ -19,6 +17,10 @@ The core idea is simple:
 - past events can later be replayed, reinterpreted, repaired, or integrated without rewriting the past
 
 This makes the model explainable, auditable, and better suited for long-term relational behavior.
+
+## Infrastructure first
+
+Reflexio is not a single assistant, product workflow, or user-facing tool. It defines the underlying state model, event model, expectation model, ledger model, resolver model, and reflection model that other modules and applications can use.
 
 ## Why it exists
 
@@ -48,22 +50,28 @@ The framework is built around a few central concepts:
 
 ## Read the docs
 
-A recommended reading path is:
+A good reading path is:
 
 1. [Executive Summary](01-executive-summary.md)
 2. [Simply Put](02-simply-put.md)
 3. [Concepts and Processes Inventory](03-concepts-and-processes-inventory.md)
 4. [Core Architectural Principles](04-core-architectural-principles.md)
-5. [Visualization Index](visualizations.md)
-6. [End-to-End Processing Flow](35-end-to-end-processing-flow.md)
+5. [Reflexio as Infrastructure](04a-reflexio-as-infrastructure.md)
+6. [Modules and Application Patterns](04b-modules-and-application-patterns.md)
+7. [Visualization Index](visualizations.md)
+8. [End-to-End Processing Flow](35-end-to-end-processing-flow.md)
 
-## Documentation sections
+## Main sections
 
 ### Introduction
 - [Executive Summary](01-executive-summary.md)
 - [Simply Put](02-simply-put.md)
 - [Concepts and Processes Inventory](03-concepts-and-processes-inventory.md)
 - [Core Architectural Principles](04-core-architectural-principles.md)
+
+### Infrastructure framing
+- [Reflexio as Infrastructure](04a-reflexio-as-infrastructure.md)
+- [Modules and Application Patterns](04b-modules-and-application-patterns.md)
 
 ### Core model
 - [State Model Overview](05-state-model-overview.md)
@@ -108,6 +116,12 @@ A recommended reading path is:
 - [Health and Adaptiveness Criteria](36-health-and-adaptiveness-criteria.md)
 - [Open Design Questions](37-open-design-questions.md)
 
+### Module examples
+- [Prospective Reflection](38-prospective-reflection.md)
+- [Simulation Sandbox](39-simulation-sandbox.md)
+- [Scenario Branches](40-scenario-branches.md)
+- [Preparatory Adjustments](41-preparatory-adjustments.md)
+
 ## Visual entry points
 
 If you prefer diagrams first, start here:
@@ -125,7 +139,7 @@ For the documentation structure itself, see:
 
 ## Status
 
-This is the first full documentation pass. The current material defines the conceptual architecture and documentation structure. Future iterations can add:
+This is the first full documentation pass. The current material defines the conceptual architecture and documentation structure. It now also includes an initial forward-looking extension, **Prospective Reflection**, for simulated decision support and scenario planning. Future iterations can add:
 - schemas
 - examples
 - implementation notes

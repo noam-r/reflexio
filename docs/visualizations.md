@@ -1,6 +1,6 @@
-# Reflexio: Visualization Index
+# Visualization Index
 
-This page collects visual diagrams that help readers understand Reflexio and navigate its main concepts more quickly.
+This page collects visual diagrams that help readers understand Reflexio.
 
 ## Purpose
 

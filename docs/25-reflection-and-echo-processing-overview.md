@@ -1,16 +1,16 @@
 # Reflection and Echo Processing Overview
 
-This page introduces the reflection framework and explains why past material is revisited later.
+This page introduces Reflexio's retrospective reflection module family and explains why preserved history may be revisited later.
 
 ## Purpose
 
-Provide an overview of the architecture’s replay and reinterpretation layer before the deeper pages on echo processing, relationship lens, insight, and adaptive processing.
+Provide an overview of the replay and reinterpretation mechanisms that retrospective modules can use before the deeper pages on echo processing, relationship lens, insight, and adaptive processing.
 
 ## Core Idea
 
 The architecture does not assume that all emotional meaning is settled at the moment an event first occurs. Some events are ambiguous, under-processed, emotionally intense, or only fully understandable in light of later context. For this reason, the system includes a reflection framework that can revisit earlier events and ledger entries after the fact.
 
-This reflection framework includes two closely related ideas:
+This module family is built from two closely related mechanisms:
 
 - **echo processing**, which replays past material
 - **structured reflection**, which examines it in a more deliberate and interpretive way
@@ -70,7 +70,7 @@ Echo processing may simply make old material emotionally active again. Structure
 
 ## What Reflection Can Produce
 
-Reflection and echo processing may lead to:
+These mechanisms may produce:
 - reactivation
 - reinterpretation
 - insight events

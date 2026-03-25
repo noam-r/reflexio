@@ -4,13 +4,13 @@ This page explains the structured examination of expectation, interpretation, an
 
 ## Purpose
 
-Define the deliberate reflective process that helps the system understand why an event mattered and how its processing might be improved.
+Define the deliberate retrospective analysis process that reconstructs why an event mattered and identifies where its processing chain may be revised.
 
 ## Core Idea
 
-Reflective review is a structured examination of a past event, the expectations that surrounded it, the discrepancy it created, the appraisal it received, and the emotional consequences that followed. It is more deliberate than simple replay. Its purpose is to expose the processing chain that turned an event into emotional impact.
+Reflective review is a structured examination of a past event, the expectations that surrounded it, the discrepancy it created, the appraisal it received, and the emotional consequences that followed. It is more deliberate than simple replay. Its purpose is to expose the processing chain that turned an event into emotional impact and to make that chain available for later explanation or module-level revision.
 
-This is one of the architecture’s main tools for explainability and adaptive improvement.
+This is one of Reflexio's main mechanisms for explainability and later adaptive revision.
 
 ## What Reflective Review Examines
 
@@ -31,7 +31,7 @@ By asking these questions explicitly, the system can see not only what it felt, 
 
 Many harmful or distorted outcomes come not only from events themselves, but from the internal chain that processed them. Reflective review exposes that chain.
 
-This makes it possible to identify:
+This makes it possible to identify processing characteristics such as:
 - unrealistic expectations
 - excessive certainty
 - rigid interpretation
