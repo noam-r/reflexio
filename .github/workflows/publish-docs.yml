@@ -16,7 +16,7 @@ jobs:
 
       - name: Build payload and publish
         env:
-          NRDOCS_API_URL: ${{ vars.NRDOCS_API_URL }}
+          NRDOCS_API_URL: https://nrdocs-control-plane.nrdocs.workers.dev
           NRDOCS_PROJECT_ID: ${{ vars.NRDOCS_PROJECT_ID }}
           NRDOCS_DOCS_DIR: ${{ vars.NRDOCS_DOCS_DIR || 'docs' }}
         run: |

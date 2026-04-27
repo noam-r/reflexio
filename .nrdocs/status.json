@@ -1,0 +1,10 @@
+{
+  "project_id": "d7591792-01b2-4a63-9136-c578072cffd1",
+  "api_url": "https://nrdocs-control-plane.nrdocs.workers.dev",
+  "delivery_url": "https://nrdocs.quinovi.com",
+  "org_slug": "default",
+  "slug": "reflexio",
+  "docs_dir": "docs",
+  "publish_branch": "nrdocs",
+  "repo_identity": "github.com/noam-r/reflexio"
+}
