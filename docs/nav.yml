@@ -1,0 +1,93 @@
+nav:
+  - label: 01 Executive Summary
+    path: 01-executive-summary
+  - label: 02 Simply Put
+    path: 02-simply-put
+  - label: 03 Concepts And Processes Inventory
+    path: 03-concepts-and-processes-inventory
+  - label: 04 Core Architectural Principles
+    path: 04-core-architectural-principles
+  - label: 04a Reflexio As Infrastructure
+    path: 04a-reflexio-as-infrastructure
+  - label: 04b Modules And Application Patterns
+    path: 04b-modules-and-application-patterns
+  - label: 05 State Model Overview
+    path: 05-state-model-overview
+  - label: 06 Self State
+    path: 06-self-state
+  - label: 07 Counterparty
+    path: 07-counterparty
+  - label: 08 Relationship State
+    path: 08-relationship-state
+  - label: 09 Event
+    path: 09-event
+  - label: 10 Event History
+    path: 10-event-history
+  - label: 11 Expectation Framework Overview
+    path: 11-expectation-framework-overview
+  - label: 12 Expectation
+    path: 12-expectation
+  - label: 13 Predictive Expectation
+    path: 13-predictive-expectation
+  - label: 14 Desired Outcome
+    path: 14-desired-outcome
+  - label: 15 Deserved Outcome
+    path: 15-deserved-outcome
+  - label: 16 Expectation Confidence Importance And Rigidity
+    path: 16-expectation-confidence-importance-and-rigidity
+  - label: 17 Discrepancy
+    path: 17-discrepancy
+  - label: 18 Appraisal
+    path: 18-appraisal
+  - label: 19 Emotion Ledger
+    path: 19-emotion-ledger
+  - label: 20 Ledger Entry
+    path: 20-ledger-entry
+  - label: 21 State Resolver
+    path: 21-state-resolver
+  - label: 22 Active State Vs Structural State
+    path: 22-active-state-vs-structural-state
+  - label: 23 Decay Persistence And Reactivation
+    path: 23-decay-persistence-and-reactivation
+  - label: 24 Pattern Detection And Consolidation
+    path: 24-pattern-detection-and-consolidation
+  - label: 25 Reflection And Echo Processing Overview
+    path: 25-reflection-and-echo-processing-overview
+  - label: 26 Echo Processing
+    path: 26-echo-processing
+  - label: 27 Relationship Lens
+    path: 27-relationship-lens
+  - label: 28 Insight Events
+    path: 28-insight-events
+  - label: 29 Reflective Review
+    path: 29-reflective-review
+  - label: 30 Reflective Adjustments
+    path: 30-reflective-adjustments
+  - label: 31 Integration And Repair
+    path: 31-integration-and-repair
+  - label: 32 Cross Relationship Spillover
+    path: 32-cross-relationship-spillover
+  - label: 33 Response Policy
+    path: 33-response-policy
+  - label: 34 Explainability And Auditability
+    path: 34-explainability-and-auditability
+  - label: 35 End To End Processing Flow
+    path: 35-end-to-end-processing-flow
+  - label: 36 Health And Adaptiveness Criteria
+    path: 36-health-and-adaptiveness-criteria
+  - label: 37 Open Design Questions
+    path: 37-open-design-questions
+  - label: 38 Prospective Reflection
+    path: 38-prospective-reflection
+  - label: 39 Simulation Sandbox
+    path: 39-simulation-sandbox
+  - label: 40 Scenario Branches
+    path: 40-scenario-branches
+  - label: 41 Preparatory Adjustments
+    path: 41-preparatory-adjustments
+  - label: Home
+    path: index
+  - label: Site Map
+    path: site-map
+  - label: Visualizations
+    path: visualizations
