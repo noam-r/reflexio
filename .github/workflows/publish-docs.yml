@@ -68,10 +68,11 @@ jobs:
           done < <(find "$DOCS_DIR/content" -name '*.md' -type f -print0 | sort -z)
 
           # Assemble payload (rawfile reads file content directly; no huge argv).
+          payload_file=$(mktemp)
           if [ -f "$DOCS_DIR/allowed-list.yml" ]; then
-            payload=$(jq -n               --rawfile project_yml "$DOCS_DIR/project.yml"               --rawfile nav_yml "$DOCS_DIR/nav.yml"               --rawfile allowed_list_yml "$DOCS_DIR/allowed-list.yml"               --slurpfile pages "$pages_file"               '{repo_content: {project_yml: $project_yml, nav_yml: $nav_yml, allowed_list_yml: $allowed_list_yml, pages: $pages[0]}}')
+            jq -n               --rawfile project_yml "$DOCS_DIR/project.yml"               --rawfile nav_yml "$DOCS_DIR/nav.yml"               --rawfile allowed_list_yml "$DOCS_DIR/allowed-list.yml"               --slurpfile pages "$pages_file"               '{repo_content: {project_yml: $project_yml, nav_yml: $nav_yml, allowed_list_yml: $allowed_list_yml, pages: $pages[0]}}' > "$payload_file"
           else
-            payload=$(jq -n               --rawfile project_yml "$DOCS_DIR/project.yml"               --rawfile nav_yml "$DOCS_DIR/nav.yml"               --slurpfile pages "$pages_file"               '{repo_content: {project_yml: $project_yml, nav_yml: $nav_yml, allowed_list_yml: null, pages: $pages[0]}}')
+            jq -n               --rawfile project_yml "$DOCS_DIR/project.yml"               --rawfile nav_yml "$DOCS_DIR/nav.yml"               --slurpfile pages "$pages_file"               '{repo_content: {project_yml: $project_yml, nav_yml: $nav_yml, allowed_list_yml: null, pages: $pages[0]}}' > "$payload_file"
           fi
 
           # Publish
@@ -80,7 +81,7 @@ jobs:
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer ${NRDOCS_PUBLISH_TOKEN}" \
             -H "X-Repo-Identity: github.com/${{ github.repository }}" \
-            -d "$payload" \
+            --data-binary "@$payload_file" \
             "${API_BASE}/projects/${NRDOCS_PROJECT_ID}/publish")
 
           echo "Response status: ${http_code}"
