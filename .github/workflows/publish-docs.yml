@@ -57,18 +57,21 @@ jobs:
           fi
 
           # Build pages map without passing large strings as CLI args.
-          pages_json=$(jq -n '{}')
+          pages_file=$(mktemp)
+          echo '{}' > "$pages_file"
           while IFS= read -r -d '' file; do
             relative="${file#"$DOCS_DIR/content/"}"
             key="${relative%.md}"
-            pages_json=$(jq --arg k "$key" --rawfile v "$file" '. + {($k): $v}' <<<"$pages_json")
+            tmp_pages=$(mktemp)
+            jq --arg k "$key" --rawfile v "$file" '. + {($k): $v}' "$pages_file" > "$tmp_pages"
+            mv "$tmp_pages" "$pages_file"
           done < <(find "$DOCS_DIR/content" -name '*.md' -type f -print0 | sort -z)
 
           # Assemble payload (rawfile reads file content directly; no huge argv).
           if [ -f "$DOCS_DIR/allowed-list.yml" ]; then
-            payload=$(jq -n               --rawfile project_yml "$DOCS_DIR/project.yml"               --rawfile nav_yml "$DOCS_DIR/nav.yml"               --rawfile allowed_list_yml "$DOCS_DIR/allowed-list.yml"               --argjson pages "$pages_json"               '{repo_content: {project_yml: $project_yml, nav_yml: $nav_yml, allowed_list_yml: $allowed_list_yml, pages: $pages}}')
+            payload=$(jq -n               --rawfile project_yml "$DOCS_DIR/project.yml"               --rawfile nav_yml "$DOCS_DIR/nav.yml"               --rawfile allowed_list_yml "$DOCS_DIR/allowed-list.yml"               --slurpfile pages "$pages_file"               '{repo_content: {project_yml: $project_yml, nav_yml: $nav_yml, allowed_list_yml: $allowed_list_yml, pages: $pages[0]}}')
           else
-            payload=$(jq -n               --rawfile project_yml "$DOCS_DIR/project.yml"               --rawfile nav_yml "$DOCS_DIR/nav.yml"               --argjson pages "$pages_json"               '{repo_content: {project_yml: $project_yml, nav_yml: $nav_yml, allowed_list_yml: null, pages: $pages}}')
+            payload=$(jq -n               --rawfile project_yml "$DOCS_DIR/project.yml"               --rawfile nav_yml "$DOCS_DIR/nav.yml"               --slurpfile pages "$pages_file"               '{repo_content: {project_yml: $project_yml, nav_yml: $nav_yml, allowed_list_yml: null, pages: $pages[0]}}')
           fi
 
           # Publish
