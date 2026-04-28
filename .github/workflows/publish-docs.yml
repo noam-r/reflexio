@@ -56,32 +56,20 @@ jobs:
             exit 1
           fi
 
-          # Read config files
-          project_yml=$(jq -Rs '.' < "$DOCS_DIR/project.yml")
-          nav_yml=$(jq -Rs '.' < "$DOCS_DIR/nav.yml")
-
-          if [ -f "$DOCS_DIR/allowed-list.yml" ]; then
-            allowed_list_yml=$(jq -Rs '.' < "$DOCS_DIR/allowed-list.yml")
-          else
-            allowed_list_yml="null"
-          fi
-
-          # Read all Markdown pages
+          # Build pages map without passing large strings as CLI args.
           pages_json=$(jq -n '{}')
           while IFS= read -r -d '' file; do
             relative="${file#"$DOCS_DIR/content/"}"
             key="${relative%.md}"
-            page_content=$(jq -Rs '.' < "$file")
-            pages_json=$(echo "$pages_json" | jq --arg k "$key" --argjson v "$page_content" '. + {($k): $v}')
+            pages_json=$(jq --arg k "$key" --rawfile v "$file" '. + {($k): $v}' <<<"$pages_json")
           done < <(find "$DOCS_DIR/content" -name '*.md' -type f -print0 | sort -z)
 
-          # Assemble payload
-          payload=$(jq -n \
-            --argjson project_yml "$project_yml" \
-            --argjson nav_yml "$nav_yml" \
-            --argjson allowed_list_yml "$allowed_list_yml" \
-            --argjson pages "$pages_json" \
-            '{repo_content: {project_yml: $project_yml, nav_yml: $nav_yml, allowed_list_yml: $allowed_list_yml, pages: $pages}}')
+          # Assemble payload (rawfile reads file content directly; no huge argv).
+          if [ -f "$DOCS_DIR/allowed-list.yml" ]; then
+            payload=$(jq -n               --rawfile project_yml "$DOCS_DIR/project.yml"               --rawfile nav_yml "$DOCS_DIR/nav.yml"               --rawfile allowed_list_yml "$DOCS_DIR/allowed-list.yml"               --argjson pages "$pages_json"               '{repo_content: {project_yml: $project_yml, nav_yml: $nav_yml, allowed_list_yml: $allowed_list_yml, pages: $pages}}')
+          else
+            payload=$(jq -n               --rawfile project_yml "$DOCS_DIR/project.yml"               --rawfile nav_yml "$DOCS_DIR/nav.yml"               --argjson pages "$pages_json"               '{repo_content: {project_yml: $project_yml, nav_yml: $nav_yml, allowed_list_yml: null, pages: $pages}}')
+          fi
 
           # Publish
           http_code=$(curl -s -o response.json -w '%{http_code}' \
