@@ -9,6 +9,9 @@ jobs:
   publish:
     name: Publish documentation
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - name: Check out repository
@@ -17,14 +20,31 @@ jobs:
       - name: Build payload and publish
         env:
           NRDOCS_API_URL: https://nrdocs-control-plane.nrdocs.workers.dev
-          NRDOCS_PROJECT_ID: ${{ vars.NRDOCS_PROJECT_ID }}
           NRDOCS_DOCS_DIR: ${{ vars.NRDOCS_DOCS_DIR || 'docs' }}
         run: |
           set -euo pipefail
           DOCS_DIR="${NRDOCS_DOCS_DIR:-docs}"
 
-          if [ -z "${NRDOCS_PROJECT_ID:-}" ]; then
-            echo "::error::NRDOCS_PROJECT_ID variable is not set"
+          # Request a GitHub Actions OIDC token scoped to the Control Plane URL (audience)
+          oidc_json=$(curl -sSf -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${NRDOCS_API_URL}")
+          oidc_token=$(echo "$oidc_json" | jq -r '.value')
+          if [ -z "$oidc_token" ] || [ "$oidc_token" = "null" ]; then
+            echo "::error::Failed to acquire GitHub OIDC token"
+            exit 1
+          fi
+
+          # Exchange OIDC for short-lived publish credentials (project_id + repo_publish_token)
+          creds=$(curl -sSf -X POST -H "Authorization: Bearer $oidc_token" "${NRDOCS_API_URL}/oidc/publish-credentials")
+          NRDOCS_PROJECT_ID=$(echo "$creds" | jq -r '.project_id')
+          NRDOCS_PUBLISH_TOKEN=$(echo "$creds" | jq -r '.repo_publish_token')
+          if [ -z "$NRDOCS_PROJECT_ID" ] || [ "$NRDOCS_PROJECT_ID" = "null" ]; then
+            echo "::error::OIDC exchange did not return project_id"
+            echo "$creds"
+            exit 1
+          fi
+          if [ -z "$NRDOCS_PUBLISH_TOKEN" ] || [ "$NRDOCS_PUBLISH_TOKEN" = "null" ]; then
+            echo "::error::OIDC exchange did not return repo_publish_token"
+            echo "$creds"
             exit 1
           fi
 
@@ -59,7 +79,7 @@ jobs:
           http_code=$(curl -s -o response.json -w '%{http_code}' \
             -X POST \
             -H "Content-Type: application/json" \
-            -H "Authorization: Bearer ${{ secrets.NRDOCS_PUBLISH_TOKEN }}" \
+            -H "Authorization: Bearer ${NRDOCS_PUBLISH_TOKEN}" \
             -H "X-Repo-Identity: github.com/${{ github.repository }}" \
             -d "$payload" \
             "${NRDOCS_API_URL}/projects/${NRDOCS_PROJECT_ID}/publish")
